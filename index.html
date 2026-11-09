@@ -1,0 +1,1158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mashal, Suno Naaa 💗</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, #ff78ad24, transparent 35%),
+    radial-gradient(circle at bottom, #b678ff28, transparent 40%),
+    linear-gradient(135deg, #0d0714, #170c24, #241038);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  padding: 30px 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen.active {
+  display: flex;
+  animation: fadeIn .45s ease;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  padding: 30px 22px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  border-radius: 28px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 12px 45px #0005;
+  backdrop-filter: blur(14px);
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 15px;
+  margin-bottom: 18px;
+  border-radius: 50px;
+  background: #ffffff12;
+  border: 1px solid #ffffff25;
+  color: #ffd8ea;
+  font-size: 13px;
+}
+
+h1, h2 {
+  line-height: 1.25;
+  margin-bottom: 17px;
+  color: #ffe0f1;
+}
+
+h1 {
+  font-size: clamp(29px, 6vw, 46px);
+  text-shadow: 0 0 25px #ff79bf44;
+}
+
+h2 {
+  font-size: clamp(23px, 5vw, 34px);
+}
+
+p {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #f5eefe;
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 16px;
+  transition: .25s;
+  font-family: inherit;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.primary {
+  background: linear-gradient(135deg, #ff5ea9, #b66dff);
+  color: white;
+  box-shadow: 0 8px 24px #ff65ad35;
+}
+
+.secondary {
+  background: #ffffff15;
+  border: 1px solid #ffffff25;
+  color: white;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 23px;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.option {
+  text-align: left;
+  background: #ffffff13;
+  border: 1px solid #ffffff25;
+  color: white;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+.option:hover,
+.option.selected {
+  background: #ff76ba30;
+  border-color: #ff87c5;
+}
+
+.reaction {
+  display: none;
+  padding: 17px;
+  margin-top: 20px;
+  background: #ffd9ec18;
+  border: 1px solid #ffffff25;
+  border-radius: 17px;
+  color: #ffe3f0;
+  line-height: 1.7;
+}
+
+.reaction.show {
+  display: block;
+  animation: pop .35s ease;
+}
+
+.next-btn {
+  display: none;
+  margin-top: 20px;
+}
+
+.next-btn.show {
+  display: inline-block;
+}
+
+.progress {
+  height: 11px;
+  margin: 20px auto 10px;
+  max-width: 430px;
+  background: #ffffff20;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff88bf, #ac76ff);
+  transition: .3s;
+}
+
+.question-count {
+  font-size: 13px;
+  color: #ffd2e8;
+}
+
+.note {
+  text-align: left;
+  padding: 22px;
+  margin-top: 15px;
+  background: #ffffff0e;
+  border: 1px solid #ffffff20;
+  border-radius: 22px;
+}
+
+.note h3 {
+  color: #ffd8ec;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.signature {
+  margin-top: 20px;
+  font-weight: bold;
+  font-style: italic;
+  color: #ffd2e8;
+}
+
+.video-box {
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #000;
+  border: 1px solid #ffffff25;
+}
+
+video {
+  width: 100%;
+  display: block;
+  max-height: 65vh;
+}
+
+.forgive-holder {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#forgiveCanvas {
+  width: min(440px, 95%);
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 24px #0005);
+}
+
+.surprise-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.surprise-msg {
+  margin-top: 20px;
+  padding: 17px;
+  background: #ffffff12;
+  border: 1px solid #ffffff25;
+  border-radius: 16px;
+  line-height: 1.7;
+}
+
+.sorry-counter {
+  margin-top: 17px;
+  color: #ffd2e8;
+  font-weight: bold;
+}
+
+/* MUSIC POPUP */
+
+.music-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(8,4,18,.88);
+  backdrop-filter: blur(16px);
+}
+
+.music-overlay.show {
+  display: flex;
+}
+
+.music-card {
+  width: 100%;
+  max-width: 390px;
+  border-radius: 30px;
+  padding: 32px 23px;
+  text-align: center;
+  background:
+    radial-gradient(circle at top, #ff7bb030, transparent 60%),
+    linear-gradient(145deg, #361635, #20122f);
+  border: 1px solid #ff93c9;
+  box-shadow: 0 0 60px #ff69b42b;
+  animation: musicPop .5s ease;
+}
+
+.music-emoji {
+  font-size: 65px;
+  display: block;
+  margin-bottom: 15px;
+  animation: musicBounce 1.5s infinite;
+}
+
+.music-card h2 {
+  color: #ffb8dc;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.music-card p {
+  font-size: 15px;
+  color: #ffeafa;
+}
+
+.music-play {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  background: linear-gradient(135deg, #ff5ca8, #b76bff);
+  color: white;
+  box-shadow: 0 8px 25px #ff5ca844;
+}
+
+.music-skip {
+  background: transparent;
+  color: #e7c9dd;
+  margin-top: 12px;
+  font-weight: normal;
+  font-size: 13px;
+}
+
+.music-toggle {
+  display: none;
+  position: fixed;
+  right: 17px;
+  bottom: 17px;
+  z-index: 990;
+  background: linear-gradient(135deg, #ff5ba8, #a66cff);
+  color: white;
+  padding: 12px 17px;
+  border-radius: 50px;
+  box-shadow: 0 6px 25px #ff69b450;
+}
+
+.music-error {
+  min-height: 0;
+  margin-top: 10px;
+  color: #ffc8db;
+  font-size: 12px;
+}
+
+/* ANIMATIONS */
+
+.floating-heart {
+  position: fixed;
+  bottom: -25px;
+  pointer-events: none;
+  z-index: 1;
+  animation: rise linear forwards;
+}
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 16px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 999;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes musicPop {
+  from {
+    opacity: 0;
+    transform: scale(.75) rotate(-4deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes musicBounce {
+  0%,100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg) scale(1.1); }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(0) scale(.8);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes confettiFall {
+  from {
+    transform: translateY(-20px) rotate(0);
+  }
+  to {
+    transform: translateY(115vh) rotate(720deg);
+  }
+}
+
+@media(max-width:600px) {
+  .wrap {
+    padding: 23px 16px;
+    border-radius: 24px;
+  }
+
+  p, .option, .reaction {
+    font-size: 14.5px;
+  }
+
+  .note {
+    padding: 18px;
+  }
+
+  .btns button {
+    width: 100%;
+  }
+
+  .surprise-buttons button {
+    width: 100%;
+  }
+
+  .music-card {
+    padding: 28px 19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST PAGE -->
+
+<section class="screen active" id="screen-0">
+  <div class="wrap">
+
+    <div class="badge">
+      Special court hearing for Mashal only 💗
+    </div>
+
+    <h1>Mashal, Suno Naaa 🥹</h1>
+
+    <p>
+      Yeh koi normal website nahi hai...
+      yeh <b>Fazeel vs Mashal narazgi case</b>
+      ki official hearing hai.
+      Aur haan, judge bhi tum ho,
+      jury bhi tum ho, aur final decision
+      bhi tumhara hi chalega. 😭🫶🏻
+    </p>
+
+    <p>
+      Agar ready ho, toh meri sunwai shuru karo...
+    </p>
+
+    <div class="btns">
+      <button class="primary" onclick="goTo(1)">
+        ⚖️ Meri sunwai shuru karo
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- EIGHT SEPARATE QUESTION SCREENS -->
+
+<div id="questionScreens"></div>
+
+
+<!-- FIRST APOLOGY -->
+
+<section class="screen" id="screen-9">
+  <div class="wrap">
+
+    <div class="badge">
+      Before next evidence... 💗
+    </div>
+
+    <div class="note">
+
+      <h3>Mashal, final baat... 💗</h3>
+
+      <p>
+        mazak apni jagah, lekin mne tumhe naraz kiya..
+        Mujhe seedha tumhari baat maan leni chahiye thi.
+        <b>I am genuinely sorry.</b>..
+        Tumhe abhi bhi gussa hai toh I understand..
+        tum jo bi bologi I'll do but please na maan
+        jao naa☹️🩷
+      </p>
+
+    </div>
+
+    <div class="btns">
+      <button class="primary" onclick="goTo(10)">
+        Theek hai, aagay dikhao ➜
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- VIDEO PAGE -->
+
+<section class="screen" id="screen-10">
+  <div class="wrap">
+
+    <div class="badge">
+      Most important evidence 🎥
+    </div>
+
+    <h2>Yeh tumhare liye... 🫶🏻</h2>
+
+    <p>
+      Is baar kuch zyada nahi bolunga...
+      bas yeh video dekho. 💗
+    </p>
+
+    <div class="video-box">
+      <video id="apologyVideo" controls playsinline preload="metadata">
+        <source src="mashal-video.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="btns">
+      <button class="primary" onclick="goTo(11)">
+        Ab final baat sun lo ➜
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SECOND APOLOGY -->
+
+<section class="screen" id="screen-11">
+  <div class="wrap">
+
+    <div class="badge">
+      Okay, now serious mode... 🥲
+    </div>
+
+    <div class="note">
+
+      <h3>Okay, ab thori si serious baat...</h3>
+
+      <p>
+        Mashal, maine mazaak mazaak mein tumhe naraz kar diya,
+        yaara me nhi krskta tha send tab kyunke mene pehle
+        kbhi kisi ko nhi ki toh mujhe ajeeb sa lag rha tha
+        like bhaee ab mereko judge mat krna but me thora sa
+        esa hi hu.. andd mne tumhe kaha tha naa mujhe mnana
+        nhi aata yaara so sorryyy mene tumhe kal raat naraz
+        sula diya yrr.. yaqeen maano tum sahi se bye nhi bol
+        ke gyi me 3 bje tak tumhari chat me hi bheta rha ke
+        shyd ab msg ajayega ya ab ajayega.. kher yaara mujhe
+        aaata toh nhi mnana but pleaseee ab maan jao..
+        merese nhi dekha Jayega tumhe naraz 🥲🫶🏻
+      </p>
+
+      <p>
+        Ab tum jo bhi decide karo, main respect karunga.
+        Bas itna samajh lo ke
+        <b>tumhari dosti important hai.</b>
+        ainda se esa nhi hoga ji..😭🤝
+      </p>
+
+      <div class="signature">
+        — Fazeel (the certified fazul tareen insan) ✍️
+      </div>
+
+    </div>
+
+    <div class="btns">
+      <button class="primary" onclick="goTo(12)">
+        Accha theek... ab last cheez ➜
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FINAL SURPRISE -->
+
+<section class="screen" id="screen-12">
+  <div class="wrap">
+
+    <div class="badge">
+      Final appeal to Mashal Court 👩🏻‍⚖️💗
+    </div>
+
+    <h2>Mashal ji, ab maan bhi jao 🥹</h2>
+
+    <p>
+      Is final page pe meri last koshish hai...
+      warna mujhe officially
+      <b>"late-video sender of the year"</b>
+      award mil jayega. 😭
+    </p>
+
+    <div class="forgive-holder">
+      <canvas id="forgiveCanvas"></canvas>
+    </div>
+
+    <div class="surprise-buttons">
+
+      <button class="primary" onclick="happyChoice()">
+        Haan, thora sa 😌
+      </button>
+
+      <button class="secondary" onclick="stillMadChoice()">
+        Abhi bhi naraz 😤
+      </button>
+
+      <button class="secondary" onclick="increaseSorry()">
+        Aur thora sa sorry bolo 🥲
+      </button>
+
+    </div>
+
+    <div class="sorry-counter">
+      Sorry counter:
+      <span id="sorryCount">0</span>
+    </div>
+
+    <div class="surprise-msg" id="surpriseMsg">
+      Decision abhi reserved hai...
+      judge Mashal soch rahi hain. 👀💗
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MUSIC AUDIO (NO TITLE DISPLAYED) -->
+
+<audio id="mashalMusic" loop preload="none">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- MUSIC POPUP -->
+
+<div class="music-overlay" id="musicPopup"
+     role="dialog" aria-modal="true"
+     aria-label="Music invitation">
+
+  <div class="music-card">
+
+    <div class="music-emoji">🎧🩷</div>
+
+    <h2>Rukooo Mashal jiii!! 😭</h2>
+
+    <p>
+      Yaar ye kya boring boring sawal
+      ho rahe hain... 😭
+      <br><br>
+      Music na chala lein?
+      Maza nhi aa rha 🎀
+    </p>
+
+    <button class="music-play" onclick="playMashalMusic()">
+      ▶ Play Music 🎶
+    </button>
+
+    <button class="music-skip" onclick="skipMashalMusic()">
+      Nahi, rehne do 🙄
+    </button>
+
+    <div class="music-error" id="musicError"></div>
+
+  </div>
+</div>
+
+
+<!-- FLOATING MUSIC CONTROL -->
+
+<button class="music-toggle"
+        id="musicToggle"
+        onclick="toggleMashalMusic()">
+  🎶 Music On
+</button>
+
+
+<script>
+
+/* ===========================
+   ALL EIGHT QUESTIONS
+=========================== */
+
+const questions = [
+
+  {
+    q: "Sawal #1: Agar koi banda video na bheje kyunke usse awkward feel ho raha ho, toh uski saza kya honi chahiye?",
+    options: [
+      "Usse 47 baar sorry bulwaya jaye",
+      "Usko thora sa tang karke maaf kar diya jaye",
+      "Uski sun li jaye kyunke woh thora awkward type hai",
+      "Usse cute si daant laga ke chance diya jaye"
+    ],
+    reactions: [
+      "47 baar? 😭 Mashal ji, yeh court hai ya torture chamber? Lekin theek hai, agar isse aap maan jao toh manzoor.",
+      "Yeh option thora reasonable hai aur thora dangerous bhi... tang bhi karna hai aur maaf bhi. 😭",
+      "Acha ji, matlab aap samajh bhi rahi ho? Bas isi umeed pe zinda hoon. 🥹",
+      "Cute si daant approved... bas lifetime ban mat laga dena pls. ☹️💗"
+    ]
+  },
+
+  {
+    q: "Sawal #2: Fazeel ki sabse badi problem iss case mein kya thi?",
+    options: [
+      "Overthinking",
+      "Ajeeb awkward feeling",
+      "Manaana nahi aata",
+      "Upar ke teeno ek saath"
+    ],
+    reactions: [
+      "Bilkul sahi. Overthinking ne banda kha liya tha. 😭",
+      "Yehi toh! Banda judge hone se pehle khud hi self-judgement mein chala gaya tha. 🥲",
+      "Haan yaara, yeh bhi sach hai. Manaana usse literally nahi aata. 😭",
+      "Perfect answer. Case closed? Matlab... thora? 😶‍🌫️💗"
+    ]
+  },
+
+  {
+    q: "Sawal #3: Kal raat 3 baje tak chat dekhte rehna kis category mein aata hai?",
+    options: [
+      "Pachtawa premium package",
+      "Level 100 wait mode",
+      "Dil se tension lena",
+      "Sab kuch ek saath"
+    ],
+    reactions: [
+      "Pachtawa premium package activated. Refund bhi nahi milega. 😭",
+      "Level 100 wait mode unlocked. Achievement milni chahiye thi honestly. 🫠",
+      "Haan, dil se tension lena hi tha warna 3 baje tak kaun betha rehta hai. ☹️",
+      "Bas isi ko kehte hain full emotional damage bundle. 🥲🫶🏻"
+    ]
+  },
+
+  {
+    q: "Sawal #4: Mashal ka gussa khatam karne ka best tareeqa kya ho sakta hai?",
+    options: [
+      "Ek achi si apology",
+      "Effort dikhana",
+      "Sach sach sab bata dena",
+      "Teenon ka combo pack"
+    ],
+    reactions: [
+      "Apology present hai ji. Dil se wali. 💗",
+      "Effort bhi dekh lo pls, banda website tak bana ke betha hai. 😭",
+      "Sach bhi bol diya: awkward feel hua, judge mat karna pls. 🥲",
+      "Combo pack hi safest hai. Hope isko acceptance mil jaye. 🫶🏻"
+    ]
+  },
+
+  {
+    q: "Sawal #5: Mashal agar naraz ho toh Fazeel ka haal kaisa hota hai?",
+    options: [
+      "Dil halka sa doob jata hai",
+      "Chat baar baar check hoti hai",
+      "Dimagh weird mode mein chala jata hai",
+      "Teeno bilkul sahi"
+    ],
+    reactions: [
+      "Dil halka kya, kaafi doob jata hai. 😭",
+      "Haan ji, chat refresh karna toh official routine ban gaya tha. 🫠",
+      "Dimagh ne literally emergency mode on kar diya tha. 🥲",
+      "Bilkul correct. Yeh hi full diagnosis hai. 💗"
+    ]
+  },
+
+  {
+    q: "Sawal #6: Agar Mashal maan gayi toh sabse pehle kya milega?",
+    options: [
+      "Inner peace",
+      "Relief + happiness",
+      "Certified zinda dil moment",
+      "In sab ka family pack"
+    ],
+    reactions: [
+      "Inner peace? Haan ji, woh bhi finally mil jayegi. 😭",
+      "Relief itna aayega ke banda shayad ro de. 🥲",
+      "Certified zinda dil moment sounds very accurate. 😌",
+      "Family pack approved. Bas maan jao ab. 🫶🏻"
+    ]
+  },
+
+  {
+    q: "Sawal #7: Is website ka hidden purpose kya hai?",
+    options: [
+      "Mashal ko hasana",
+      "Mashal ko manana",
+      "Effort dikhana",
+      "Sab kuch together"
+    ],
+    reactions: [
+      "Agar tum hansi, toh half mission complete. 😂💗",
+      "Primary objective yehi hai. Please cooperate, respected judge. 🥹",
+      "Effort officially present. HTML tak aa gaya scene. 😭",
+      "Yes yes yes. Yeh full package hai. 🫶🏻"
+    ]
+  },
+
+  {
+    q: "Sawal #8: Final verdict kya hona chahiye?",
+    options: [
+      "Thora aur tang karo, phir maaf karo",
+      "Maaf kar do warna banda ro dega",
+      "Aik aur chance milna chahiye",
+      "Chalo theek hai, maan gaye 😌"
+    ],
+    reactions: [
+      "Tang karna expected tha... bas last mein maaf bhi kar dena pls. 😭",
+      "Emotional blackmail nahi hai... bas halka sa sach hai. 🥲",
+      "Exactly! Bas ek chance aur. Promise ainda better rahunga. 🤝",
+      "Yeh sabse khoobsurat option hai. Isse meri rooh ko sukoon milega. 💗"
+    ]
+  }
+
+];
+
+
+/* ===========================
+   GENERATE QUESTION PAGES
+=========================== */
+
+const container = document.getElementById("questionScreens");
+
+questions.forEach((item, index) => {
+
+  const number = index + 1;
+  const next = number + 1;
+
+  const optionsHTML = item.options.map((opt, i) => `
+    <button class="option"
+      onclick="chooseOption(${number}, ${i}, this)">
+      ${opt}
+    </button>
+  `).join("");
+
+  container.insertAdjacentHTML("beforeend", `
+    <section class="screen" id="screen-${number}">
+      <div class="wrap">
+
+        <div class="badge">
+          The Great Mashal Court ⚖️
+        </div>
+
+        <h2>${item.q}</h2>
+
+        <div class="progress">
+          <span style="width:${number * 12.5}%"></span>
+        </div>
+
+        <div class="question-count">
+          Question ${number} of 8
+        </div>
+
+        <div class="options">
+          ${optionsHTML}
+        </div>
+
+        <div class="reaction" id="reaction-${number}"></div>
+
+        <button class="primary next-btn"
+          id="next-${number}"
+          onclick="goTo(${next})">
+          Next ➜
+        </button>
+
+      </div>
+    </section>
+  `);
+
+});
+
+
+/* ===========================
+   QUESTION ANSWERS
+=========================== */
+
+function chooseOption(number, optionIndex, button) {
+
+  const reaction = document.getElementById(`reaction-${number}`);
+  const next = document.getElementById(`next-${number}`);
+
+  reaction.textContent =
+    questions[number - 1].reactions[optionIndex];
+
+  reaction.classList.add("show");
+  next.classList.add("show");
+
+  const buttons =
+    document.querySelectorAll(`#screen-${number} .option`);
+
+  buttons.forEach(btn => btn.classList.remove("selected"));
+
+  button.classList.add("selected");
+
+  spawnHearts(3);
+}
+
+
+/* ===========================
+   PAGE NAVIGATION
+=========================== */
+
+let musicPopupShown = false;
+let resumeAfterVideo = false;
+
+function goTo(num) {
+
+  const music = document.getElementById("mashalMusic");
+  const video = document.getElementById("apologyVideo");
+
+  const oldScreen = document.querySelector(".screen.active");
+  const oldId = oldScreen ? oldScreen.id : "";
+
+  if (oldId === "screen-10" && num !== 10) {
+    video.pause();
+  }
+
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById(`screen-${num}`).classList.add("active");
+
+  window.scrollTo(0, 0);
+
+  // MUSIC POPUP AFTER TWO QUESTIONS
+  if (num === 3 && !musicPopupShown) {
+
+    musicPopupShown = true;
+
+    document.getElementById("musicPopup")
+      .classList.add("show");
+  }
+
+  // PAUSE MUSIC ON VIDEO PAGE
+  if (num === 10) {
+
+    resumeAfterVideo = !music.paused;
+    music.pause();
+    updateMusicButton();
+  }
+
+  // RESUME AFTER LEAVING VIDEO PAGE
+  if (oldId === "screen-10" && num === 11) 
+
+{
+  if (resumeAfterVideo) {
+    music.play()
+      .then(updateMusicButton)
+      .catch(updateMusicButton);
+  }
+  resumeAfterVideo = false;
+}
+
+if (num === 12) {
+  renderForgiveImage();
+}
+}
+
+// MUSIC CONTROLS
+const music = document.getElementById("mashalMusic");
+const toggle = document.getElementById("musicToggle");
+
+function updateMusicButton() {
+  toggle.textContent = music.paused
+    ? "🎶 Music On" : "🔇 Music Off";
+}
+
+function playMashalMusic() {
+  music.volume = 0.65;
+
+  music.play().then(() => {
+    document.getElementById("musicPopup")
+      .classList.remove("show");
+
+    toggle.style.display = "block";
+    updateMusicButton();
+    spawnHearts(12);
+  }).catch(() => {
+    document.getElementById("musicError")
+      .textContent = "Music play nahi ho saki 🥲";
+  });
+}
+
+function skipMashalMusic() {
+  document.getElementById("musicPopup")
+    .classList.remove("show");
+
+  toggle.style.display = "block";
+  updateMusicButton();
+}
+
+function toggleMashalMusic() {
+  if (music.paused) {
+    music.play()
+      .then(updateMusicButton)
+      .catch(updateMusicButton);
+  } else {
+    music.pause();
+    updateMusicButton();
+  }
+}
+
+document.getElementById("apologyVideo")
+  .addEventListener("play", () => {
+    music.pause();
+    updateMusicButton();
+  });
+
+// SURPRISE BUTTONS
+let sorryCount = 0;
+let madCount = 0;
+
+function increaseSorry() {
+  sorryCount++;
+
+  document.getElementById("sorryCount")
+    .textContent = sorryCount;
+
+  const replies = [
+    "Sorryyy Mashal ji 😭💗",
+    "Aur kitni baar sorry bolun? 🥲",
+    "Mujhe manana nahi aata yaara ☹️",
+    "Please ab maan jao naaa 🫶🏻"
+  ];
+
+  document.getElementById("surpriseMsg")
+    .textContent = replies[(sorryCount - 1) % replies.length];
+
+  spawnHearts(8);
+}
+
+function happyChoice() {
+  document.getElementById("surpriseMsg")
+    .textContent =
+      "YAYYYY 😭💗 Mashal ji thora sa maan gayi!";
+
+  throwConfetti();
+  spawnHearts(20);
+}
+
+function stillMadChoice() {
+  const replies = [
+    "Acha ji, abhi bhi naraz? 😭",
+    "Theek hai, aapka gussa valid hai 🥲",
+    "Respectfully ek aur appeal karun? 🥹",
+    "Thora aur waqt le lo, koi jaldi nahi 💗"
+  ];
+
+  document.getElementById("surpriseMsg")
+    .textContent = replies[madCount % replies.length];
+
+  madCount++;
+}
+
+// HEARTS ANIMATION
+function spawnHearts(amount = 8) {
+  const emojis = ["💗", "🩷", "💕", "💖"];
+
+  for (let i = 0; i < amount; i++) {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+
+    heart.textContent =
+      emojis[Math.floor(Math.random() * emojis.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = "24px";
+    heart.style.animationDuration =
+      (4 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7500);
+  }
+}
+
+// CONFETTI ANIMATION
+function throwConfetti() {
+  const colors = [
+    "#ff74b8", "#c783ff", "#ffd166",
+    "#93f5ff", "#ff9ec7"
+  ];
+
+  for (let i = 0; i < 90; i++) {
+    const piece = document.createElement("div");
+
+    piece.className = "confetti";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration =
+      (2.5 + Math.random() * 2.5) + "s";
+
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 5500);
+  }
+}
+
+// TRANSPARENT PNG
+function renderForgiveImage() {
+  const canvas = document.getElementById("forgiveCanvas");
+  if (canvas.dataset.loaded) return;
+
+  const img = new Image();
+  img.src = "forgive.png";
+
+  img.onload = function() {
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    canvas.getContext("2d")
+      .drawImage(img, 0, 0);
+
+    canvas.dataset.loaded = "true";
+  };
+
+  img.onerror = function() {
+    canvas.style.display = "none";
+  };
+}
+
+</script>
+</body>
+</html>
